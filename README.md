@@ -1,6 +1,4 @@
-frontend-nanodegree-arcade-game
+Bug Avoider
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
-
-for self-checking their submission.
+Play it here: http://sheryllun.github.io/Project3-BugAvoider/index.html
