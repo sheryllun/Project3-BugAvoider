@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Effective JavaScript: Frogger</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header>
+		<h1>Bug Avoider</h1>
+		<h2>You have 30 seconds to make it to the other side as many times as possible!</h2>
+		<div id="score"></div>
+		<div id="timer">
+			
+		</div>
+		<button name="refresh" onClick="history.go(0)">Try Again</button>
+	</header>
+	<div id="container">
+    	<script src="js/resources.js"></script>
+    	<script src="js/app.js"></script>
+    	<script src="js/engine.js"></script>
+    	<script type="text/javascript">window.onload = createTimer("timer", 30);</script>
+    </div>
+</body>
+</html>
