@@ -3,9 +3,14 @@ body {
     font-family: "Roboto Condensed"
 }
 
+header {
+	text-align: center;
+}
+
 h2 {
 	font-size: 20px;
-	margin-bottom: 40px;
+	margin: 40px auto;
+	width: 500px;
 }
 
 #container {
@@ -33,14 +38,17 @@ h2 {
 
 button {
 	font-size: 15px;
-	border-radius: 10px;
+	border-radius: 5px;
 	color: white;
-	background-color: #F4B7CC;
-	border: 2px solid #5F5E5F;
-	padding: 5px 10px;
+	background-color: #D86F81;
+	border: 0;
+	border-bottom: 3px solid #929193;
+	border-right: 3px solid #929193;
+	padding: 10px 15px;
 	margin-bottom: 5px;
 }
 
 button:hover {
-	background-color: #BA2310;
+	background-color: #F4B7CC;
+	border-bottom: 3px solid #5F5E5F;
 }

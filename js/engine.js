@@ -7,7 +7,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 680;
+    canvas.height = 600;
     document.getElementById('container').appendChild(canvas);
 
     function main() {
@@ -31,7 +31,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions(allEnemies, player);
-        winGame();
+        reachEnd();
     }
 
     function updateEntities(dt) {
@@ -48,17 +48,31 @@ var Engine = (function(global) {
                 'images/stone-block.png',
                 'images/stone-block.png',
                 'images/grass-block.png',
-                'images/grass-block.png',
-                'images/white-block.png'
+                'images/grass-block.png'
             ],
-            numRows = 7,
+
+            rowOneImages = [
+                'images/water-block.png',
+                'images/stone-block-top.png',
+                'images/water-block.png',
+                'images/stone-block-top.png',
+                'images/water-block.png'
+            ],
+
+            numRows = 6,
             numCols = 5,
             row, col;
 
-        for (row = 0; row < numRows; row++) {
+        for(row = 0; row < 1; row++) {
+            for(col = 0; col < numCols; col++) {
+                ctx.drawImage(Resources.get(rowOneImages[col]), col*101, row *83);
+            }
+        }
+
+        for (row = 1; row < numRows; row++) {
             for (col = 0; col < numCols; col++) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
-            }        
+            } 
         }
         renderEntities();
     }
@@ -82,7 +96,7 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/Heartsmall.png',
-        'images/white-block.png',
+        'images/stone-block-top.png',
         'images/char-boy.png',
         'images/char-cat-girl.png',
         'images/char-horn-girl.png',

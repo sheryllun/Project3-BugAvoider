@@ -1,15 +1,13 @@
-//Arrays of starting positions and speeds
-var enemyY = [60,145,230];
-var enemySpeed = [30,100,170,250,320,500];
-var playerX = [100,200,300,400];
-var playerY = [300,400];
 
 // Enemies our player must avoid
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     //The following tracks the position of our enemies.
+    this.enemyY = [60,145,230];
     this.x = this.startPosX();
     this.y = this.startPosY();
+    //some random speeds for our enemies
+    this.speed = [30,100,170,250,320,500];
 }
 
 //Randomize the initial X and Y-value starting positions
@@ -19,13 +17,13 @@ Enemy.prototype.startPosX = function() {
 }
 
 Enemy.prototype.startPosY = function() {
-    var startY = enemyY[Math.round(Math.random()*2)];
+    var startY = this.enemyY[Math.round(Math.random()*2)];
     return startY;
 }
 
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    this.x += enemySpeed[Math.round(Math.random()*5)]*dt;
+    this.x += this.speed[Math.round(Math.random()*5)]*dt;
     //If our enemies move off the screen, restart them again at the beginning.
     if(this.x > 500) {
         this.x = this.startPosX();
@@ -38,29 +36,31 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-var pImages = [
+
+// Now write your own player class
+var Player = function() {
+    //pick a random character image
+    this.pImages = [
     'images/char-boy.png',
     'images/char-cat-girl.png',
     'images/char-horn-girl.png',
     'images/char-pink-girl.png',
     'images/char-princess-girl.png'
-];
-
-// Now write your own player class
-var Player = function() {
-    //pick a random character image
-    this.sprite = pImages[Math.floor(Math.random()*5)];
+    ];
+    this.sprite = this.pImages[Math.floor(Math.random()*5)];
+    this.playerX = [100,200,300,400];
+    this.playerY = [300,400];
     this.x = this.startPosX();
     this.y = this.startPosY();
 }
 
 Player.prototype.startPosX = function () {
-    var startX = playerX[Math.round(Math.random()*3)];
+    var startX = this.playerX[Math.round(Math.random()*3)];
     return startX;
 }
 
 Player.prototype.startPosY = function() {
-    var startY = playerY[Math.round(Math.random())];
+    var startY = this.playerY[Math.round(Math.random())];
     return startY;
 }
 
@@ -104,7 +104,7 @@ Player.prototype.handleInput = function (num) {
 //create a new class to track number of lives per player.
 var Life = function() {
     this.lifeImg = 'images/Heartsmall.png';
-    this.number = 3;
+    this.number = 5;
 }
 
 //draws the hearts for each life.
@@ -154,7 +154,7 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
-function resetGame() {
+function resetPositions() {
     player.reset();
     for(var j in allEnemies) {
         allEnemies[j].x = allEnemies[j].startPosX();
@@ -166,28 +166,36 @@ function resetGame() {
 function checkCollisions(enemy, player) { 
     for(var i in enemy) {
       if((player.x - enemy[i].x < 50 && player.y - enemy[i].y < 50) && (player.x - enemy[i].x > -50 && player.y - enemy[i].y > -50)) {
-        resetGame();
+        resetPositions();
         roundLife.loseLife();
         }
     }   
 }
 
 var score = 0;
-//If player reaches the water, reset the game, increase score.
-function winGame() {
+//If player reaches the water, reset the game.
+function reachEnd() {
     document.getElementById('score').innerHTML = "Score: "+score;
     if(player.y < 0) {
-        score++;
+        if((player.x > 0 && player.x < 200) || (player.x > 200 && player.x < 400)) {
+        score++
         player.reset();
+        }
+
+        else {
+            resetPositions();
+            roundLife.loseLife();
+        }
     }
 }
 
+//when time runs out or player loses all lives, the game is over.
 function gameOver() {
     var removeScore = document.getElementById('score');
         removeScore.parentNode.removeChild(removeScore);
         timer = document.getElementById('timer');
         timer.parentNode.removeChild(timer);
-        ctx.clearRect(0,0, 505, 680);
+        ctx.clearRect(0,0, 505, 600);
         ctx.fillStyle="#FF0000";
         ctx.font = "50px Roboto Condensed";
         ctx.fillStyle="#000000";
