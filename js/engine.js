@@ -25,7 +25,17 @@ var Engine = (function(global) {
 
         reset();
         lastTime = Date.now();
-        main();
+        //Game doesn't start until user clicks button. Rearranges some elements on the page.
+        document.getElementById('start').onclick = function() {
+            main();
+            createTimer('timer', 30);
+            document.getElementById('timer').style.display = "inline-block";
+            document.getElementById('refresh').style.display = "inline-block";
+            var h2 = document.getElementById('description');
+            h2.parentNode.removeChild(h2);
+            var startButton = document.getElementById('start');
+            startButton.parentNode.removeChild(startButton);
+        }
     }
 
     function update(dt) {

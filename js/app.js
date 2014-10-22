@@ -104,7 +104,7 @@ Player.prototype.handleInput = function (num) {
 //create a new class to track number of lives per player.
 var Life = function() {
     this.lifeImg = 'images/Heartsmall.png';
-    this.number = 5;
+    this.number = 3;
 }
 
 //draws the hearts for each life.
@@ -199,9 +199,9 @@ function gameOver() {
         ctx.fillStyle="#FF0000";
         ctx.font = "50px Roboto Condensed";
         ctx.fillStyle="#000000";
-        ctx.fillText("Game Over!", 150, 100);
+        ctx.fillText("Game Over!", 140, 100);
         ctx.font="30px Roboto Condensed";
-        ctx.fillText("Your final score is " + score, 150, 150);
+        ctx.fillText("Your final score is " + score, 140, 150);
 }
 
 //Create a 30-second timed game
