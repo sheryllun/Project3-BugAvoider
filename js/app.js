@@ -133,9 +133,13 @@ var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 var player = new Player();
 var roundLife = new Life();
 
+//This variable disables the key presses until the game is started.
+var enabled = false;
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
+    if(enabled === true) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -144,6 +148,7 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+}
 });
 
 //disables arrow keys from scrolling window in game.

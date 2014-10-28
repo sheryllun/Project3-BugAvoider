@@ -10,6 +10,7 @@ var Engine = (function(global) {
     canvas.height = 600;
     document.getElementById('container').appendChild(canvas);
 
+
     function main() {
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
@@ -25,17 +26,18 @@ var Engine = (function(global) {
 
         reset();
         lastTime = Date.now();
-        //Game doesn't start until user clicks button. Rearranges some elements on the page.
-        document.getElementById('start').onclick = function() {
-            main();
-            createTimer('timer', 30);
-            document.getElementById('timer').style.display = "inline-block";
-            document.getElementById('refresh').style.display = "inline-block";
-            var h2 = document.getElementById('description');
-            h2.parentNode.removeChild(h2);
-            var startButton = document.getElementById('start');
-            startButton.parentNode.removeChild(startButton);
-        }
+     // Game doesn't start until user clicks button. Rearranges some elements on the page and enable player keypresses.
+       document.getElementById('start').onclick = function() {
+           main();
+           createTimer('timer', 30);
+           document.getElementById('timer').style.display = "inline-block";
+           document.getElementById('refresh').style.display = "inline-block";
+           var h2 = document.getElementById('description');
+           h2.parentNode.removeChild(h2);
+           var startButton = document.getElementById('start');
+           startButton.parentNode.removeChild(startButton);
+           enabled = true;
+       } 
     }
 
     function update(dt) {
