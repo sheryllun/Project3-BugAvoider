@@ -36,7 +36,7 @@ var Engine = (function(global) {
            h2.parentNode.removeChild(h2);
            var startButton = document.getElementById('start');
            startButton.parentNode.removeChild(startButton);
-           enabled = true;
+           keyEnabled = true;
        } 
     }
 

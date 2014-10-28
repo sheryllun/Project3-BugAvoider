@@ -134,12 +134,12 @@ var player = new Player();
 var roundLife = new Life();
 
 //This variable disables the key presses until the game is started.
-var enabled = false;
+var keyEnabled = false;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    if(enabled === true) {
+    if(keyEnabled === true) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -207,6 +207,7 @@ function gameOver() {
         ctx.fillText("Game Over!", 140, 100);
         ctx.font="30px Roboto Condensed";
         ctx.fillText("Your final score is " + score, 140, 150);
+        keyEnabled = false;
 }
 
 //Create a 30-second timed game
